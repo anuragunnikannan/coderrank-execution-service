@@ -18,9 +18,9 @@ if mode == "run":
         input_file = f.read()
     
     if language == "java":
-        output = subprocess.run(["java", "/codes/Solution.java"], input=input_file, capture_output=True)
+        output = subprocess.run(["java", "/codes/Solution.java"], input=input_file, capture_output=True, timeout=10)
     elif language == "python":
-        output = subprocess.run(["python3", "/codes/solution.py"], input=input_file, capture_output=True)
+        output = subprocess.run(["python3", "/codes/solution.py"], input=input_file, capture_output=True, timeout=10)
 
     stdout = output.stdout.decode().strip()
     stderr = output.stderr.decode().strip()
@@ -38,17 +38,17 @@ elif mode == "submit":
     for i in test_cases["inputs"]:
         if language == "java":
             if is_compiled:
-                output = subprocess.run(["java", "-cp", "/codes/", "Solution"], input=i.encode("utf-8"), capture_output=True)
+                output = subprocess.run(["java", "-cp", "/codes/", "Solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
             else:
                 output = subprocess.run(["javac", "/codes/Solution.java"], capture_output=True)
                 
                 if output.returncode == 0:
-                    output = subprocess.run(["java", "-cp", "/codes/", "Solution"], input=i.encode("utf-8"), capture_output=True)
+                    output = subprocess.run(["java", "-cp", "/codes/", "Solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
                     is_compiled = True
                 else:
                     break
         elif language == "python":
-            output = subprocess.run(["python3", "/codes/solution.py"], input=i.encode(encoding="utf-8") , capture_output=True)
+            output = subprocess.run(["python3", "/codes/solution.py"], input=i.encode(encoding="utf-8") , capture_output=True, timeout=10)
         
         stdout = output.stdout.decode().strip()
         stderr = output.stderr.decode().strip()
