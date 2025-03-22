@@ -1,8 +1,8 @@
 import subprocess
 import sys
 
-mode = sys.argv[0]
-language = sys.argv[1]
+mode = sys.argv[1]
+language = sys.argv[2]
 
 if mode == "run":
     input_file = ""
@@ -16,7 +16,7 @@ if mode == "run":
     if language == "java":
         output = subprocess.run(["java", f"/codes/Solution.java"], input=input_file, capture_output=True)
     elif language == "python":
-        output = subprocess.run(["python3", f"/codes/app.py"], input=input_file, capture_output=True)
+        output = subprocess.run(["python3", f"/codes/solution.py"], input=input_file, capture_output=True)
 
     stdout = output.stdout.decode().strip()
     stderr = output.stderr.decode().strip()
