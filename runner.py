@@ -25,3 +25,5 @@ if mode == "run":
         print(stderr)
     else:
         print(stdout)
+
+print("hello")
