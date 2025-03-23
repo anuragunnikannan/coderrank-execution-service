@@ -52,6 +52,7 @@ elif mode == "submit":
                         ["java", "-cp", "/codes/", "Solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
                     is_compiled = True
                 else:
+                    result.append(output.stderr.decode().strip())
                     break
         elif language == "python":
             output = subprocess.run(["python3", "/codes/solution.py"], input=i.encode(
