@@ -10,7 +10,7 @@ stdout = ""
 stderr = ""
 output = ""
 test_cases = []
-result = []
+result = {"compilation_status": "", "outputs": []}
 
 if mode == "run":
 
@@ -51,7 +51,8 @@ elif mode == "submit":
                         ["java", "-cp", "/codes/", "Solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
                     is_compiled = True
                 else:
-                    result.append(output.stderr.decode().strip())
+                    result["compilation_status"] = "failed"
+                    result["outputs"].append(output.stdout.decode().strip())
                     break
         elif language == "python":
             output = subprocess.run(["python3", "/codes/solution.py"], input=i.encode(
@@ -61,8 +62,8 @@ elif mode == "submit":
         stderr = output.stderr.decode().strip()
 
         if len(stderr) > len(stdout):
-            result.append(stderr)
+            result["outputs"].append(stderr)
         else:
-            result.append(stdout)
+            result["outputs"].append(stdout)
 
     print(json.dumps(result))
