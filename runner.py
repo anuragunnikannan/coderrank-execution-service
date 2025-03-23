@@ -46,6 +46,7 @@ elif mode == "submit":
                 output = subprocess.run(
                     ["javac", "/codes/Solution.java"], capture_output=True)
 
+                print(output.returncode)
                 if output.returncode == 0:
                     output = subprocess.run(
                         ["java", "-cp", "/codes/", "Solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
