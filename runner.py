@@ -59,6 +59,8 @@ elif mode == "submit":
 
         stdout = output.stdout.decode().strip()
         stderr = output.stderr.decode().strip()
+        print(stdout)
+        print(stderr)
 
         if len(stderr) > len(stdout):
             result.append(stderr)
