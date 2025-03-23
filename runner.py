@@ -64,4 +64,4 @@ elif mode == "submit":
         else:
             result.append(stdout)
 
-    print(result)
+    print(json.dumps(result))
