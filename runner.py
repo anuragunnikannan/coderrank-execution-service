@@ -34,7 +34,6 @@ if mode == "run":
 
 elif mode == "submit":
     with open("/codes/test_cases.json", "r") as f:
-        print(f.read())
         test_cases = json.loads(f.read())
 
     is_compiled = False
