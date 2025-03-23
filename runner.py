@@ -52,7 +52,7 @@ elif mode == "submit":
                     is_compiled = True
                 else:
                     result["compilation_status"] = "failed"
-                    result["outputs"].append(output.stdout.decode().strip())
+                    result["outputs"].append(output.stderr.decode().strip())
                     break
         elif language == "python":
             output = subprocess.run(["python3", "/codes/solution.py"], input=i.encode(
