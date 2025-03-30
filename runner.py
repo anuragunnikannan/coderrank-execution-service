@@ -44,7 +44,6 @@ if mode == "run":
 elif mode == "submit":
     with open("/codes/test_cases.json", "r") as f:
         test_cases = json.loads(f.read())
-    print(test_cases)
 
     is_compiled = False
     for i in test_cases["inputs"]:
@@ -87,7 +86,7 @@ elif mode == "submit":
 
         elif language == "javascript":
             output = subprocess.run(
-                ["node", "/codes/solution.js"], input=input_file, capture_output=True, timeout=10)
+                ["node", "/codes/solution.js"], input=i.encode(encoding="utf-8"), capture_output=True, timeout=10)
 
         stdout = output.stdout.decode().strip()
         stderr = output.stderr.decode().strip()
