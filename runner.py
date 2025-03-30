@@ -23,12 +23,15 @@ if mode == "run":
     elif language == "python":
         output = subprocess.run(["python3", "/codes/solution.py"],
                                 input=input_file, capture_output=True, timeout=10)
-    elif language == "c++":
+    elif language == "cpp":
         output = subprocess.run(
             ["g++", "-o", "/codes/solution", "/codes/solution.cpp"], capture_output=True)
         if output.returncode == 0:
             output = subprocess.run(
                 ["/codes/solution"], input=input_file, capture_output=True, timeout=10)
+    elif language == "javascript":
+        output = subprocess.run(
+            ["node", "/codes/solution.js"], input=input_file, capture_output=True, timeout=10)
 
     stdout = output.stdout.decode().strip()
     stderr = output.stderr.decode().strip()
@@ -60,7 +63,7 @@ elif mode == "submit":
                     result["compilation_status"] = "failed"
                     result["outputs"].append(output.stderr.decode().strip())
                     break
-        elif language == "c++":
+        elif language == "cpp":
             if is_compiled:
                 output = subprocess.run(
                     ["/codes/solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
@@ -80,6 +83,10 @@ elif mode == "submit":
         elif language == "python":
             output = subprocess.run(["python3", "/codes/solution.py"], input=i.encode(
                 encoding="utf-8"), capture_output=True, timeout=10)
+
+        elif language == "javascript":
+            output = subprocess.run(
+                ["node", "/codes/solution.js"], input=input_file, capture_output=True, timeout=10)
 
         stdout = output.stdout.decode().strip()
         stderr = output.stderr.decode().strip()
