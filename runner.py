@@ -25,7 +25,7 @@ if mode == "run":
                                 input=input_file, capture_output=True, timeout=10)
     elif language == "c++":
         output = subprocess.run(
-            ["g++ -o solution /codes/solution.cpp"], capture_output=True)
+            ["g++", "-o", "solution", "/codes/solution.cpp"], capture_output=True)
         if output.returncode == 0:
             output = subprocess.run(
                 ["/codes/solution"], input=input_file, capture_output=True, timeout=10)
@@ -66,7 +66,7 @@ elif mode == "submit":
                     ["/codes/solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
             else:
                 output = subprocess.run(
-                    ["g++ -o solution", "/codes/solution.cpp"], capture_output=True)
+                    ["g++", "-o", "solution", "/codes/solution.cpp"], capture_output=True)
 
                 if output.returncode == 0:
                     output = subprocess.run(
