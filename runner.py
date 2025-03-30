@@ -23,6 +23,12 @@ if mode == "run":
     elif language == "python":
         output = subprocess.run(["python3", "/codes/solution.py"],
                                 input=input_file, capture_output=True, timeout=10)
+    elif language == "c++":
+        output = subprocess.run(
+            ["g++ -o solution", "/codes/solution.cpp"], capture_output=True)
+        if output.returncode == 0:
+            output = subprocess.run(
+                ["/codes/solution"], input=input_file, capture_output=True, timeout=10)
 
     stdout = output.stdout.decode().strip()
     stderr = output.stderr.decode().strip()
@@ -54,6 +60,23 @@ elif mode == "submit":
                     result["compilation_status"] = "failed"
                     result["outputs"].append(output.stderr.decode().strip())
                     break
+        elif language == "c++":
+            if is_compiled:
+                output = subprocess.run(
+                    ["/codes/solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
+            else:
+                output = subprocess.run(
+                    ["g++ -o solution", "/codes/solution.cpp"], capture_output=True)
+
+                if output.returncode == 0:
+                    output = subprocess.run(
+                        ["/codes/solution"], input=i.encode("utf-8"), capture_output=True, timeout=10)
+                    is_compiled = True
+                else:
+                    result["compilation_status"] = "failed"
+                    result["outputs"].append(output.stderr.decode().strip())
+                    break
+
         elif language == "python":
             output = subprocess.run(["python3", "/codes/solution.py"], input=i.encode(
                 encoding="utf-8"), capture_output=True, timeout=10)
