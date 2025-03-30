@@ -19,19 +19,19 @@ if mode == "run":
 
     if language == "java":
         output = subprocess.run(["java", "/codes/Solution.java"],
-                                input=input_file+"\n", capture_output=True, timeout=10)
+                                input=input_file, capture_output=True, timeout=10)
     elif language == "python":
         output = subprocess.run(["python3", "/codes/solution.py"],
-                                input=input_file+"\n", capture_output=True, timeout=10)
+                                input=input_file, capture_output=True, timeout=10)
     elif language == "cpp":
         output = subprocess.run(
             ["g++", "-o", "/codes/solution", "/codes/solution.cpp"], capture_output=True)
         if output.returncode == 0:
             output = subprocess.run(
-                ["/codes/solution"], input=input_file+"\n", capture_output=True, timeout=10)
+                ["/codes/solution"], input=input_file, capture_output=True, timeout=10)
     elif language == "javascript":
         output = subprocess.run(
-            ["node", "/codes/solution.js"], input=input_file+"\n", capture_output=True, timeout=10)
+            ["node", "/codes/solution.js"], input=input_file, capture_output=True, timeout=10)
 
     stdout = output.stdout.decode().strip()
     stderr = output.stderr.decode().strip()
